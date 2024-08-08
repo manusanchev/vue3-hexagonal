@@ -1,21 +1,35 @@
 <script setup lang="ts">
 import TextareaBase from '@/components/base/TextareaBase.vue'
-import { reactive, ref } from 'vue'
-import { useCreatePost } from '@/composables/usesCases/useCreatePost'
-const form = reactive({
+import { computed, onBeforeMount, reactive, ref } from 'vue'
+import { useCreatePost } from '@/composables/usesCases/post/useCreatePost'
+import { usePostStore } from '@/stores/posts'
+import { useGetAllPosts } from '@/composables/usesCases/post/useGetAllPosts'
+const initialState = {
   title: '',
   content: ''
-})
+};
 
-const errors = ref({
-  title: '',
-  content: ''
+const form = reactive({ ...initialState })
+const errors = ref({ ...initialState })
+
+const postStore = usePostStore();
+
+onBeforeMount(async () => {
+  await useGetAllPosts()
 })
+const posts = computed(() => postStore.posts)
 
 const submitForm = async () => {
   const { error } = await useCreatePost(form)
+  if (!error) {
+    resetForm();
+    return;
+  }
   errors.value = error
+}
 
+const resetForm = () => {
+  Object.assign(form, initialState);
 }
 </script>
 
@@ -30,5 +44,9 @@ const submitForm = async () => {
         <span v-if="errors?.content">{{errors.content}}</span>
       </div>
     </form>
+    <div v-for="post in posts" :key="post.id">
+      {{post.title}}
+      {{post.content}}
+    </div>
   </main>
 </template>

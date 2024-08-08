@@ -1,5 +1,6 @@
-import type { CreatePostDTO } from '@/core/post/application/createPost'
+import type { Post } from '@/core/post/domain/Post'
 
 export interface PostRepository {
-  create(dto: CreatePostDTO): Promise<void>
+  create(post: Post): Promise<void>
+  getAll(): Promise<Post[]>
 }

@@ -2,11 +2,15 @@ import { createPost, type CreatePostDTO } from '@/core/post/application/createPo
 import type { composableParent } from '@/composables/composableParent'
 import { TitleIsRequiredException } from '@/core/post/domain/exceptions/TitleIsRequiredException'
 import { ContentIsRequiredException } from '@/core/post/domain/exceptions/ContentIsRequiredException'
+import { usePostStore } from '@/stores/posts'
 
 export const useCreatePost = async (post: CreatePostDTO): Promise<composableParent> => {
   const { execute } = createPost()
+
+  const postStore = usePostStore()
   try {
-    await execute(post)
+    const postCreated = await execute(post)
+    postStore.addPost(postCreated)
     return { data: null, error: null }
   } catch (error) {
     const handledError = handleCreatePostError(error)

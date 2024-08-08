@@ -1,12 +1,19 @@
 import type { PostRepository } from '@/core/post/domain/PostRepository'
-import type { CreatePostDTO } from '@/core/post/application/createPost'
+import type { Post } from '@/core/post/domain/Post'
 
 export const localStoragePostRepository = (): PostRepository => {
-  const create = async (post: CreatePostDTO) => {
-    localStorage.setItem('post', JSON.stringify(post))
+  const create = async (post: Post) => {
+    const posts = await getAll()
+    posts.unshift(post)
+    localStorage.setItem('posts', JSON.stringify(posts))
+  }
+
+  const getAll = async () => {
+    return JSON.parse(localStorage.getItem('posts') || '[]')
   }
 
   return {
-    create
+    create,
+    getAll
   }
 }
