@@ -1,6 +1,6 @@
 # comenty
 
-## Vue 3 functional approach to build projects with vue3 following the principles of the hexagonal architecture.
+## Vue 3 functional approach to build projects following the principles of the hexagonal architecture.
 
 ### What is this for?
 This project will be used as a template for new projects in the future, to build highly scalable applications. But for the moment it is wip
