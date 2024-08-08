@@ -30,6 +30,7 @@ const submitForm = async () => {
 
 const resetForm = () => {
   Object.assign(form, initialState);
+  Object.assign(errors.value, initialState);
 }
 </script>
 
