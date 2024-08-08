@@ -38,4 +38,4 @@ export const createPost = () => {
 so I load the repository only when I need it. This is just an example, I can use a lot of modules like loggers and more....
 
 ### composables as use cases for UI
-I am using composables to remove the dependency between the application layer and the presentation layer (framework), so I can use libraries like vue-router and pinia without using them as infrastructure dependencies, frontend frameworks are hard to update or upgrade if the dependencies that belong to the framework end up decoupled in my infrastructure. So I pay for this to avoid problems, trade-off.
+I am using composables to remove the dependency between the application layer and the UI layer (framework), so I can use libraries like vue-router and pinia without using them as infrastructure dependencies, frontend frameworks are hard to update or upgrade if the dependencies that belong to the framework end up decoupled in my infrastructure. So I pay for this to avoid problems, trade-off.
