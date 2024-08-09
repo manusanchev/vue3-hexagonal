@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-const model = defineModel()
+const model = defineModel<string>()
 
 </script>
 <style scoped>
