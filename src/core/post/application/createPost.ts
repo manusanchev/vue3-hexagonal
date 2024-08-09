@@ -4,11 +4,10 @@ import { TitleIsRequiredException } from '@/core/post/domain/exceptions/TitleIsR
 import { ContentIsRequiredException } from '@/core/post/domain/exceptions/ContentIsRequiredException'
 import type { Post } from '@/core/post/domain/Post'
 import type { UuidGenerator } from '@/core/shared/domain/uuidGenerator'
-
-export const createPost = () => {
+export const createPost = (dependencies = useDependencies) => {
   const execute = async (post: CreatePostDTO): Promise<Post> => {
     validateCreatePostDTO(post)
-    const { postRepository, uuidGenerator } = await useDependencies()
+    const { postRepository, uuidGenerator } = await dependencies()
     const id = uuidGenerator.generate();
     const postToCreate = { ...post, id }
     await postRepository.create(postToCreate)

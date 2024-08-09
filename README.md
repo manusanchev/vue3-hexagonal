@@ -1,41 +1,67 @@
-# comenty
+# Comenty
 
-## Vue 3 functional approach to build projects following the principles of the hexagonal architecture.
+## Vue 3 Template for Hexagonal Architecture
 
-### What is this for?
-This project will be used as a template for new projects in the future, to build highly scalable applications. But for the moment it is wip
+### Overview
+Comenty is a Vue 3 project template designed to facilitate the creation of highly scalable applications following the principles of hexagonal architecture. Although currently a work in progress (WIP), this template aims to serve as a foundation for future projects.
 
-### Can I contribute?
-Yes, you can contribute to this project, just make a fork and make a pull request, I will review it and merge it if it is good.
+### Why Use This Template?
+The goal of this template is to streamline the development of scalable and maintainable applications by adhering to the principles of hexagonal architecture, promoting clean separation between business logic and external frameworks or tools.
 
-### Why not use a dependency injection container?
-The problem with inversify or other npm dependency injection modules is that you have to register all your dependencies in the container at the start of your application, so you have to load all the modules at the beginning, even if you don't need them, so it becomes a performance issue.
-### Dependency injection
-I'm not using a dependency injection container, so instead, I'm using dynamic imports within my repositories and my use cases to improve performance and testability in a functional and modern way
+### Contributing
+Contributions are welcome! If you'd like to contribute:
+1. Fork the repository.
+2. Make your changes.
+3. Submit a pull request.
 
-I resolve the dependency using the injectDenpendency function typed with the generic dependency type
+Your contributions will be reviewed and, if they align with the project's goals, will be merged.
+
+### Rationale Against Dependency Injection Containers
+Dependency injection containers like Inversify can introduce performance overhead by requiring all dependencies to be registered at the application's start, leading to unnecessary loading of unused modules. To avoid this, Comenty opts for a different approach.
+
+### Dependency Injection Strategy
+Instead of using a traditional dependency injection container, Comenty leverages dynamic imports within repositories and use cases. This approach enhances performance and testability by loading dependencies only when needed.
+
+#### Example
+Here's an example of how dependencies are dynamically injected:
+
 ```js
-
-
 const useDependencies = async () => {
   const postRepository = await injectDependency<PostRepository>(import("@/core/post/infrastructure/localStoragePostRepository"));
-  return { postRepository }
+  return { postRepository };
 }
 
-export const createPost = () => {
+export const createPost = (dependencies = useDependencies) => {
   const execute = async (post: CreatePostDTO) => {
-    validateCreatePostDTO(post)
-    const { postRepository } = await useDependencies()
-    await postRepository.create(post)
+    validateCreatePostDTO(post);
+    const { postRepository } = await dependencies();
+    await postRepository.create(post);
   }
 
-  return {
-    execute
-  }
+  return { execute };
 }
 ```
+In this example, the postRepository is only loaded when necessary, optimizing the application's performance.
 
-so I load the repository only when I need it. This is just an example, I can use a lot of modules like loggers and more....
+### Using Composables as Use Cases
+Comenty uses composables to separate the application layer from the UI layer (e.g., Vue, Pinia, vue-router). This design ensures that frontend frameworks remain decoupled from the core infrastructure, making upgrades and updates easier and reducing the risk of dependency-related issues.
 
-### composables as use cases for UI
-I am using composables to remove the dependency between the application layer and the UI layer (framework), so I can use libraries like vue-router and pinia without using them as infrastructure dependencies, frontend frameworks are hard to update or upgrade if the dependencies that belong to the framework end up decoupled in my infrastructure. So I pay for this to avoid problems, trade-off.
+### Testing
+To enhance testability, dependencies are injected as parameters into the use cases. This allows for easy mocking of dependencies during tests, using tools like ts-mockito.
+
+#### Example Test Setup
+Here's how you can mock dependencies in your tests:
+```js
+const prepareTest = () => {
+  const mockPostRepository = mock<PostRepository>();
+  when(mockPostRepository.getAll()).thenResolve([{
+    id: '123e4567-e89b-12d3-a456-426614174000',
+    title: 'Test Title',
+    content: 'Test Content',
+  }]);
+
+  return { postRepository: instance(mockPostRepository) };
+}
+```
+This setup allows you to effectively test your use cases without relying on actual implementations of the dependencies.
+

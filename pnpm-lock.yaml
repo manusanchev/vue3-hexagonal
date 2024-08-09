@@ -84,6 +84,9 @@ importers:
       tailwindcss:
         specifier: ^3.4.8
         version: 3.4.8
+      ts-mockito:
+        specifier: ^2.6.1
+        version: 2.6.1
       typescript:
         specifier: ~5.4.0
         version: 5.4.5
@@ -2529,6 +2532,9 @@ packages:
 
   ts-interface-checker@0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
+
+  ts-mockito@2.6.1:
+    resolution: {integrity: sha512-qU9m/oEBQrKq5hwfbJ7MgmVN5Gu6lFnIGWvpxSjrqq6YYEVv+RwVFWySbZMBgazsWqv6ctAyVBpo9TmAxnOEKw==}
 
   tslib@2.6.3:
     resolution: {integrity: sha512-xNvxJEOUiWPGhUuUdQgAJPKOOJfGnIyKySOc09XkKsgdUV/3E2zvwZYdejjmRgPCgcym1juLH3226yA7sEFJKQ==}
@@ -5372,6 +5378,10 @@ snapshots:
       typescript: 5.4.5
 
   ts-interface-checker@0.1.13: {}
+
+  ts-mockito@2.6.1:
+    dependencies:
+      lodash: 4.17.21
 
   tslib@2.6.3: {}
 
