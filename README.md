@@ -52,6 +52,10 @@ To enhance testability, dependencies are injected as parameters into the use cas
 #### Example Test Setup
 Here's how you can mock dependencies in your tests:
 ```js
+
+getAllPosts(() => Promise.resolve({ postRepository }));
+....
+
 const prepareTest = () => {
   const mockPostRepository = mock<PostRepository>();
   when(mockPostRepository.getAll()).thenResolve([{
@@ -62,6 +66,8 @@ const prepareTest = () => {
 
   return { postRepository: instance(mockPostRepository) };
 }
+
+
 ```
 This setup allows you to effectively test your use cases without relying on actual implementations of the dependencies.
 
