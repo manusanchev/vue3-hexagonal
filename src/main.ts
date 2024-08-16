@@ -5,10 +5,11 @@ import { createPinia } from 'pinia'
 
 import App from './App.vue'
 import router from './router'
+import SocketConnectionPlugin from '@/plugins/socketConnectionPlugin'
 
 const app = createApp(App)
 
 app.use(createPinia())
 app.use(router)
-
+app.use(SocketConnectionPlugin)
 app.mount('#app')

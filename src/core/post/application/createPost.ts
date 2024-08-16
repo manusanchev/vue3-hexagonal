@@ -3,7 +3,7 @@ import { injectDependency } from '@/core/shared/infrastructure/dependencies/inje
 import { TitleIsRequiredException } from '@/core/post/domain/exceptions/TitleIsRequiredException'
 import { ContentIsRequiredException } from '@/core/post/domain/exceptions/ContentIsRequiredException'
 import type { Post } from '@/core/post/domain/Post'
-import type { UuidGenerator } from '@/core/shared/domain/uuidGenerator'
+import type { UuidGenerator } from '@/core/shared/domain/generator/uuidGenerator'
 export const createPost = (dependencies = useDependencies) => {
   const execute = async (post: CreatePostDTO): Promise<Post> => {
     validateCreatePostDTO(post)

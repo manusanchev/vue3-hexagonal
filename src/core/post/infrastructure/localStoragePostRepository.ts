@@ -8,7 +8,7 @@ export const localStoragePostRepository = (): PostRepository => {
     localStorage.setItem('posts', JSON.stringify(posts))
   }
 
-  const getAll = async () => {
+  const getAll = async (): Promise<Post[]> => {
     return JSON.parse(localStorage.getItem('posts') || '[]')
   }
 

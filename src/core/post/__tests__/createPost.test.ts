@@ -4,7 +4,7 @@ import { TitleIsRequiredException } from '@/core/post/domain/exceptions/TitleIsR
 import { ContentIsRequiredException } from '@/core/post/domain/exceptions/ContentIsRequiredException';
 import { mock, instance, when, anything } from 'ts-mockito';
 import type { PostRepository } from '@/core/post/domain/PostRepository';
-import type { UuidGenerator } from '@/core/shared/domain/uuidGenerator';
+import type { UuidGenerator } from '../../shared/domain/generator/uuidGenerator';
 
 describe('createPost', () => {
   it.concurrent('should created a post and return it', async () => {
