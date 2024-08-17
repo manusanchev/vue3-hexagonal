@@ -4,7 +4,7 @@ describe('My First Test', () => {
     cy.visit('/')
     cy.findByPlaceholderText("Escribe tu titulo").type('Titulo')
     cy.findByPlaceholderText("En que estas pensando?").type('conteeenido')
-    cy.get('button').click()
+    cy.findByText('Enviar').click()
     cy.contains('Titulo')
     cy.contains('conteeenido')
   })
