@@ -1,3 +1,0 @@
-<template>
-  dwq
-</template>
