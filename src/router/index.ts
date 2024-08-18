@@ -8,6 +8,11 @@ const router = createRouter({
       name: 'home',
       component: () => import('@/views/HomeView.vue')
     },
+    {
+      path: '/backlog',
+      name: 'backlog',
+      component: () => import('@/views/BacklogView2.vue')
+    }
   ]
 })
 

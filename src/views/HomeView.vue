@@ -36,6 +36,7 @@ const resetForm = () => {
 
 <template>
   <main>
+    <RouterLink to="/backlog">backlog</RouterLink>
     <form class="max-w-2xl mx-auto pt-4 flex flex-col" @submit.prevent="submitForm">
       <button type="submit" class="bg-black py-2 px-4 rounded-lg self-end text-sm text-white mb-4 max-w-fit hover:bg-gray-900 transition-all">Enviar</button>
       <div class="px-4 py-2 bg-white rounded-xl max-w-2xl flex flex-col">
